@@ -9,126 +9,100 @@ public class Flag : MonoBehaviour
     [SerializeField]
     private GameObject flag;
 
-   [SerializeField] private GameManager gameManager;
-   
-
     //[SerializeField]
     //private Material[] area;
 
-    private bool isChangeFlag = true;
-    
-    
-    public bool IsChangeFlag
-    {
-        get
-        {
-            return isChangeFlag;
-        }
-        set
-        {
-            isChangeFlag = value;
-        }
-    }
-     
-    private bool canChangeFlagUI = false;
-    public bool CanChangeFlagUI
-    {
-        get
-        {
-            return canChangeFlagUI;
-        }
-        set
-        {
-            canChangeFlagUI = value;
-        }
-    }
+    //private bool isChangeFlag = true;
 
+    //public bool IsChangeFlag
+    //{
+    //    get
+    //    {
+    //        return isChangeFlag;
+    //    }
+    //    set
+    //    {
+    //        isChangeFlag = value;
+    //    }
+    //}
 
-
+    //private bool canChangeFlagUI = false;
+    //public bool CanChangeFlagUI
+    //{
+    //    get
+    //    {
+    //        return canChangeFlagUI;
+    //    }
+    //    set
+    //    {
+    //        canChangeFlagUI = value;
+    //    }
+    //}
     private void OnCollisionEnter(Collision other)
-
     {
-        if(isChangeFlag)
-        {
-            StartCoroutine(WhaitWhenConquered());
+        //if(isChangeFlag)
+        
+            //StartCoroutine(WaitWhenConquered());
             if (other.gameObject.CompareTag("Player"))
             {
-                PlayerMovement whichAGroup = other.gameObject.GetComponentInChildren<PlayerMovement>();
-                Groups groupes = whichAGroup.myGroup;
-                if (groupes == Groups.Groupe1 && myFlag == Groups.Groupe2)
+            Groups whichGroup = other.gameObject.GetComponentInChildren<PlayerMovement>().myGroup;
+           
+            if (whichGroup == Groups.Groupe1 && myFlag == Groups.Groupe2)
                 {
                     Debug.Log("the flag is conquerded");
-                    ChangeArea();
-                    ChangeFlag();
-                }
-                else if (groupes == Groups.Groupe2 && myFlag == Groups.Groupe1)
-                {
-                    Debug.Log("the flag is conquerded");
-                    ChangeArea();
-                    ChangeFlag();
-                }
+                    ChangeArea(myFlag);
+                    ChangeFlag(myFlag);
+                //myFlag = Groups.Groupe1;
+              
             }
-        }
-       
+            else if (whichGroup == Groups.Groupe2 && myFlag == Groups.Groupe1)
+                {
+           
+                    ChangeArea(myFlag);
+                    ChangeFlag(myFlag);
+                //myFlag = Groups.Groupe2;
+            }
+            //GameManager.Instance.OnFlagConquered(myFlag);
+        }  
     }
     
 
-    private void ChangeFlag()
+    private void ChangeFlag(Groups groups)
     {
-        Debug.Log("change flag");
         gameObject.SetActive(false);
         flag.SetActive(true);
-       
-       
-            if (myFlag == Groups.Groupe2)
-            {
-                
-                gameManager.FlagGro1Num++;
-                gameManager.FlagGro2Num--;
+        switch (groups)
+        {
+            case Groups.Groupe1:
+                groups = Groups.Groupe2;
+                    break;
+            case Groups.Groupe2:
+                groups = Groups.Groupe1;
+                break;
 
-                //if(gameManager.FlagGro1Num >= 8)
-                //{
-                //  SceneManager.LoadScene("WinScene");
-                //}
-                
-            }
-            else if (myFlag == Groups.Groupe1)
-            {
-                
-                gameManager.FlagGro1Num--;
-                gameManager.FlagGro2Num++;
-
-            //if (gameManager.FlagGro2Num >= 8)
-            //{
-            //    SceneManager.LoadScene("WinScene");
-            //}
-
-            }
-            gameManager.IsConquered = true;
-          
-       
+        }
+        GameManager.Instance.OnFlagConquered(groups);
         
     }
 
-    private void ChangeArea()
+    private void ChangeArea(Groups groups)
     {
-        if(myFlag == Groups.Groupe2)
+        switch (groups)
         {
-            transform.parent.gameObject.layer = 8;
-            //transform.parent.GetComponent<Renderer>().material = area[0];
-        }
-        else if(myFlag == Groups.Groupe1)
-        {
-            transform.parent.gameObject.layer = 9;
-            //transform.parent.GetComponent<Renderer>().material = area[1];
-        }
 
+            case Groups.Groupe2:
+                transform.parent.gameObject.layer = 8;
+                break;
+            case Groups.Groupe1:
+                transform.parent.gameObject.layer = 9;
+                break;
+        }
     }
 
-  private IEnumerator WhaitWhenConquered()
-    {
-        isChangeFlag = false;
-        yield return new WaitForSeconds(2f);
-        isChangeFlag = true;
-    }
+  //private IEnumerator WaitWhenConquered()
+  //  {
+  //      isChangeFlag = false;
+  //      yield return new WaitForSeconds(2f);
+  //      isChangeFlag = true;
+  //  }
 }

@@ -12,8 +12,7 @@ public enum PicUpType
 public class AddAbility : MonoBehaviour
 {
     [SerializeField] PicUpType type;
-    [SerializeField] GameManager gameManager;
-    //[SerializeField] PlayerHPdata playerData;
+
     private bool isCaughtShoot = true;
     private bool isCaughtSpead = true;
 

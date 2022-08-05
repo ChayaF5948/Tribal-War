@@ -10,7 +10,7 @@ public class PlayerBeaviour : MonoBehaviour
 
     public PlayerHPdata playerData;
 
-    private PlayerMovement playerMovement;
+    private PlayerMovement whichGroup;
     private SwitchPlayers switchPlayers;
     [SerializeField]
     private GameManager gameManager;
@@ -81,8 +81,8 @@ public class PlayerBeaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             
-            playerMovement = other.gameObject.GetComponentInChildren<PlayerMovement>();
-            Groups groupe = playerMovement.myGroup;
+            whichGroup = other.gameObject.GetComponentInChildren<PlayerMovement>();
+            Groups groupe = whichGroup.myGroup;
 
             if (myGroup == Groups.Groupe1 && isMyGround && groupe == Groups.Groupe2 || myGroup == Groups.Groupe2 && isMyGround && groupe == Groups.Groupe1)
             {
@@ -127,7 +127,7 @@ public class PlayerBeaviour : MonoBehaviour
     private void MovmentStop(Collider player)
     {
         //Debug.Log("I catched you!");
-        playerMovement.enabled = false;
+        whichGroup.enabled = false;
         
         switchPlayers = player.gameObject.GetComponent<SwitchPlayers>();
         switchPlayers.Icaught = true;

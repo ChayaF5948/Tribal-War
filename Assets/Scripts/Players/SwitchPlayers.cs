@@ -18,7 +18,6 @@ public class SwitchPlayers : MonoBehaviour
     private bool iCaught = false;
     public bool Icaught
     {
-
         get { return iCaught; }
         set { iCaught = value; }
     }
