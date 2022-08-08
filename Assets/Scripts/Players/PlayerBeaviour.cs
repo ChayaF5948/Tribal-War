@@ -4,35 +4,26 @@ using UnityEngine;
 
 public class PlayerBeaviour : MonoBehaviour
 {
-    [SerializeField]
-    private bool isMyGround;
+    [SerializeField]private bool isMyGround;
     private bool isTrigger;
 
+    [SerializeField] private GameManager gameManager;
+    public Groups myGroup;
     public PlayerHPdata playerData;
-
     private PlayerMovement whichGroup;
     private SwitchPlayers switchPlayers;
-    [SerializeField]
-    private GameManager gameManager;
+    private Spin spin;
 
     private const string AREA_GROUPE1 = "AreaGroupe1";
     private const string AREA_GROUPE2 = "AreaGroupe2";
-    public Groups myGroup;
-
+  
     private const string BULLET_GROUP1 = "BulletGroup1";
     private const string BULLET_GROUP2 = "BulletGroup2";
-
-    private Spin spin;
-
 
     public bool IsMyGround
     {
         get => isMyGround;
     }
-
-
-
-
 
     private void Start()
     {
@@ -42,6 +33,7 @@ public class PlayerBeaviour : MonoBehaviour
         spin.enabled = false;
     }
 
+   
     private void OnCollisionEnter(Collision collision)
     {
         if (myGroup == Groups.Groupe1)
@@ -97,29 +89,18 @@ public class PlayerBeaviour : MonoBehaviour
 
         }
 
-
-
-
-
-
-
     }
 
     private void CheckIfMyArea(Collision area, string areaName1, string areaName2)
     {
-
         if (area.collider.gameObject.layer == LayerMask.NameToLayer(areaName1))
         {
             isMyGround = true;
-            
-
             isTrigger = false;
         }
-
         else if (area.collider.gameObject.layer == LayerMask.NameToLayer(areaName2))
         {
             isMyGround = false;
-            
             isTrigger = true;
         }
     }
@@ -128,17 +109,14 @@ public class PlayerBeaviour : MonoBehaviour
     {
         //Debug.Log("I catched you!");
         whichGroup.enabled = false;
-        
         switchPlayers = player.gameObject.GetComponent<SwitchPlayers>();
         switchPlayers.Icaught = true;
         gameManager.ThePlayerCaught = true;
-        
     }
 
     private void MovmentAble(Collider player)
     {
         //Debug.Log("You are free!!");
-
         switchPlayers = player.gameObject.GetComponent<SwitchPlayers>();
         switchPlayers.Icaught = false;
     }

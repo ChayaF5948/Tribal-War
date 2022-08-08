@@ -9,8 +9,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] 
     private AudioClip[] audioClips;
 
-    [SerializeField]
-    private GameManager gameManager;
+    //[SerializeField]
+    //private GameManager gameManager;
     [SerializeField]
     private PlayerHPdata[] playerHPdata;
     private AddAbility AddAbility;
@@ -57,9 +57,8 @@ public class SoundManager : MonoBehaviour
             audioSource.clip = audioClips[1];
             audioSource.Play();
         }
-  
-
     }
+
     private void PlayBulletSound(int bullet )
     {
         audioSource.clip = audioClips[2];

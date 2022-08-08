@@ -9,40 +9,9 @@ public class Flag : MonoBehaviour
     [SerializeField]
     private GameObject flag;
 
-    //[SerializeField]
-    //private Material[] area;
-
-    //private bool isChangeFlag = true;
-
-    //public bool IsChangeFlag
-    //{
-    //    get
-    //    {
-    //        return isChangeFlag;
-    //    }
-    //    set
-    //    {
-    //        isChangeFlag = value;
-    //    }
-    //}
-
-    //private bool canChangeFlagUI = false;
-    //public bool CanChangeFlagUI
-    //{
-    //    get
-    //    {
-    //        return canChangeFlagUI;
-    //    }
-    //    set
-    //    {
-    //        canChangeFlagUI = value;
-    //    }
-    //}
+    
     private void OnCollisionEnter(Collision other)
     {
-        //if(isChangeFlag)
-        
-            //StartCoroutine(WaitWhenConquered());
             if (other.gameObject.CompareTag("Player"))
             {
             Groups whichGroup = other.gameObject.GetComponentInChildren<PlayerMovement>().myGroup;
@@ -52,17 +21,12 @@ public class Flag : MonoBehaviour
                     Debug.Log("the flag is conquerded");
                     ChangeArea(myFlag);
                     ChangeFlag(myFlag);
-                //myFlag = Groups.Groupe1;
-              
             }
             else if (whichGroup == Groups.Groupe2 && myFlag == Groups.Groupe1)
-                {
-           
-                    ChangeArea(myFlag);
-                    ChangeFlag(myFlag);
-                //myFlag = Groups.Groupe2;
+            {
+                ChangeArea(myFlag);
+                ChangeFlag(myFlag);
             }
-            //GameManager.Instance.OnFlagConquered(myFlag);
         }  
     }
     
@@ -82,7 +46,8 @@ public class Flag : MonoBehaviour
 
         }
         GameManager.Instance.OnFlagConquered(groups);
-        
+
+
     }
 
     private void ChangeArea(Groups groups)
@@ -98,11 +63,4 @@ public class Flag : MonoBehaviour
                 break;
         }
     }
-
-  //private IEnumerator WaitWhenConquered()
-  //  {
-  //      isChangeFlag = false;
-  //      yield return new WaitForSeconds(2f);
-  //      isChangeFlag = true;
-  //  }
 }

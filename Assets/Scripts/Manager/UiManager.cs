@@ -43,15 +43,15 @@ public class UiManager : MonoBehaviour
         playerData[1].OnAddScore += ChangeTheNumbeSrcoreP2Text;
     }
 
-    //private void ChangeTheNumberFlagsText(Groups groups,int flags )
-    //{
-    //    groups = GameManager.Instance.GetFlagsScoresGroup
+    private void ChangeTheNumberFlagsText(int flagsP1, int flagsP2,bool Istrue)
+    {
+        //groups = GameManager.Instance.GetFlagsScoresGroup
 
 
-    //        flagTextP1.text = $"{flagsP1.ToString()}";
-    //        flagTextP2.text = $"{flagsP2.ToString()}";
-         
-    //}
+        flagTextP1.text = $"{flagsP1.ToString()}";
+        flagTextP2.text = $"{flagsP2.ToString()}";
+
+    }
 
     private void ChangeTheNumberBulletsP1Text(int bulletP1)
     {

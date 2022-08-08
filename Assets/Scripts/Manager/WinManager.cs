@@ -12,27 +12,8 @@ public class WinManager : MonoBehaviour
     private Text whoWin;
 
     private bool group1win = false;
-    //public bool Group1win
-    //{
-    //    get { return group1win; }
-    //    set
-    //    {
-    //        group1win = value;
-    //    }
-    //}
     private bool group2win = false;
-    //public bool Group2win
-    //{
-    //    get { return group2win; }
-    //    set
-    //    {
-    //        group2win = value;
-    //    }
-    //}
-
-    //private bool isLoad = false;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);

@@ -13,19 +13,10 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 80f;
     [SerializeField] private float addSpeed = 120f;
-    //public float MoveSpeed
-    //{
-    //    get { return moveSpeed;}
-    //    set { moveSpeed = value;}
-    //}
+   
     [SerializeField] private float rotateSpeed = 300f;
     [SerializeField] private float addRotateSpeed = 400f;
-    //public float RotateSpeed
-    //{
-    //    get { return rotateSpeed; }
-    //    set { rotateSpeed = value; }
-    //}
-
+   
     private bool increaseSpeed;
     public bool IncreaseSpeed
     {
@@ -45,23 +36,27 @@ public class PlayerMovement : MonoBehaviour
     private float v2Input;
     private float h2Input;
 
-    //private float dubelSpeeed =1;
+    [SerializeField] private Light light;
 
     public Groups myGroup;
 
     private Rigidbody rb;
 
     public PlayerHPdata playerData;
-    
-    
+
+    private void OnEnable()
+    {
+        light.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        light.enabled = false;
+    }
+
     private void Start()
     {
-
         rb = GetComponent<Rigidbody>();
-        
-        //playerHPdata.Bullets = 0;
-        //playerHPdata.Score = 0;
-        
     }
 
     private void Update()
@@ -90,17 +85,7 @@ public class PlayerMovement : MonoBehaviour
                 increaseSpeed = false;
             }
         }
-        //if (playerHPdata.Bullets >= 5)
-        //{
-        //    Debug.Log("Bullets" + playerHPdata.Bullets);
-        //}
-
-        //if(playerData.Score == 30)
-        //{
-        //    moveSpeed *= 2;
-        //    rotateSpeed *= 2;
-        //    Debug.Log("Double speed");
-        //}
+        
     }
     private void FixedUpdate()
     {   
